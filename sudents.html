@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brexbin - Find Your Perfect Part-Time Job</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#1E40AF',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <h1 class="text-2xl font-bold text-primary">Brexbin</h1>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button onclick="showSection('home')" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Home</button>
+                    <button class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium">
+                        <a href="payment.html">Payment</a>
+                    </button>
+                    <button onclick="showSection('jobs')" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Browse Jobs</button>
+                    <button onclick="showSection('post')" class="bg-primary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-secondary">Post a Job</button>
+                    <button onclick="showProfile()" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium">Profile</button>
+                    <button onclick="toggleNotifications()" class="relative text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5zM19 12H5a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v5a2 2 0 01-2 2z"/>
+                        </svg>
+                        <span id="notificationDot" class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full hidden"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Notification Panel -->
+    <div id="notificationPanel" class="fixed top-16 right-4 w-80 bg-white rounded-xl shadow-2xl border border-primary/20 z-50 hidden transition-all">
+        <div class="p-4 border-b border-gray-100 flex justify-between items-center">
+            <span class="font-bold text-primary text-lg">Notifications</span>
+            <button onclick="toggleNotifications()" class="text-gray-400 hover:text-primary">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div id="notificationList" class="max-h-64 overflow-y-auto p-4 space-y-3">
+            
+        </div>
+    </div>
+
+    <!-- Home Section -->
+    <div id="home" class="section">
+        <!-- Hero Section -->
+        <div class="bg-gradient-to-r from-primary to-secondary text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+                <div class="text-center">
+                    <h2 class="text-4xl font-extrabold sm:text-5xl">
+                        Find Student-Friendly Jobs
+                    </h2>
+                    <p class="mt-4 text-xl">
+                        Connect with flexible opportunities that fit your schedule and help you earn while you learn
+                    </p>
+                    <div class="mt-8">
+                        <button onclick="showSection('jobs')" class="bg-white text-primary px-8 py-3 rounded-lg text-lg font-medium hover:bg-gray-100 transform hover:scale-105 transition-all">
+                            Browse Jobs Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <div class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h3 class="text-3xl font-extrabold text-gray-900">Why Choose Brexbin?</h3>
+                </div>
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="text-center p-6">
+                        <div class="bg-primary rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="text-xl font-semibold text-gray-900">Flexible Hours</h4>
+                        <p class="mt-2 text-gray-600">Jobs that work around your class schedule</p>
+                    </div>
+                    <div class="text-center p-6">
+                        <div class="bg-primary rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                            </svg>
+                        </div>
+                        <h4 class="text-xl font-semibold text-gray-900">Fair Pay</h4>
+                        <p class="mt-2 text-gray-600">Competitive wages for student positions</p>
+                    </div>
+                    <div class="text-center p-6">
+                        <div class="bg-primary rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="text-xl font-semibold text-gray-900">Quick Apply</h4>
+                        <p class="mt-2 text-gray-600">Simple application process</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Calendar Section -->
+    <div id="calendar" class="section hidden">
+        <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Calendar</h2>
+                <div class="flex justify-between items-center mb-4">
+                    <button id="prevMonth" class="bg-primary text-white px-3 py-1 rounded hover:bg-secondary">&lt;</button>
+                    <div id="calendarMonthLabel" class="font-semibold text-lg"></div>
+                    <button id="nextMonth" class="bg-primary text-white px-3 py-1 rounded hover:bg-secondary">&gt;</button>
+                </div>
+                <div id="calendarContainer"></div>
+                <div class="mt-6">
+                    <h3 class="text-lg font-semibold mb-2">Add Event</h3>
+                    <form id="eventForm" class="flex flex-col gap-2 md:flex-row md:items-end md:gap-4" onsubmit="addCalendarEvent(event)">
+                        <input type="date" id="eventDate" required class="border border-gray-300 rounded px-2 py-1">
+                        <input type="text" id="eventTitle" placeholder="Event Title" required class="border border-gray-300 rounded px-2 py-1 flex-1">
+                        <button type="submit" class="bg-primary text-white px-4 py-1 rounded hover:bg-secondary">Add</button>
+                    </form>
+                    <div id="eventList" class="mt-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Calendar State
+        let calendarState = {
+            year: new Date().getFullYear(),
+            month: new Date().getMonth()
+        };
+
+        function getCalendarEvents() {
+            return JSON.parse(localStorage.getItem('calendarEvents') || '[]');
+        }
+        function setCalendarEvents(events) {
+            localStorage.setItem('calendarEvents', JSON.stringify(events));
+        }
+
+        function renderCalendar() {
+            const container = document.getElementById('calendarContainer');
+            const label = document.getElementById('calendarMonthLabel');
+            const { year, month } = calendarState;
+            const today = new Date();
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const events = getCalendarEvents();
+
+            label.textContent = new Date(year, month).toLocaleString('default', { month: 'long', year: 'numeric' });
+
+            let html = `<div class="grid grid-cols-7 gap-2 text-center mb-2">
+                            <div class="font-bold">Sun</div>
+                            <div class="font-bold">Mon</div>
+                            <div class="font-bold">Tue</div>
+                            <div class="font-bold">Wed</div>
+                            <div class="font-bold">Thu</div>
+                            <div class="font-bold">Fri</div>
+                            <div class="font-bold">Sat</div>
+                        </div>`;
+            html += `<div class="grid grid-cols-7 gap-2 text-center">`;
+
+            // Empty cells for days before the 1st
+            for (let i = 0; i < firstDay; i++) {
+                html += `<div></div>`;
+            }
+            // Days of the month
+            for (let d = 1; d <= daysInMonth; d++) {
+                const isToday = d === today.getDate() && month === today.getMonth() && year === today.getFullYear();
+                const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+                const dayEvents = events.filter(ev => ev.date === dateStr);
+                html += `<div class="py-2 rounded-md cursor-pointer ${isToday ? 'bg-primary text-white font-bold' : 'bg-gray-100 hover:bg-primary/10'}" onclick="showDayEvents('${dateStr}')">
+                            ${d}
+                            ${dayEvents.length ? `<span class="block mt-1 w-2 h-2 mx-auto rounded-full bg-primary"></span>` : ''}
+                        </div>`;
+            }
+            html += `</div>`;
+            container.innerHTML = html;
+        }
+
+        function showDayEvents(dateStr) {
+            const events = getCalendarEvents().filter(ev => ev.date === dateStr);
+            const eventList = document.getElementById('eventList');
+            if (!events.length) {
+                eventList.innerHTML = `<div class="text-gray-500 text-sm">No events for ${dateStr}.</div>`;
+                return;
+            }
+            eventList.innerHTML = `<div class="font-semibold mb-1 text-primary">${dateStr}</div>` +
+                events.map((ev, idx) => `
+                    <div class="flex items-center justify-between bg-gray-100 rounded px-3 py-1 mb-1">
+                        <span>${ev.title}</span>
+                        <button onclick="deleteCalendarEvent('${dateStr}', ${idx})" class="text-red-500 hover:underline text-xs">Delete</button>
+                    </div>
+                `).join('');
+        }
+
+        function addCalendarEvent(e) {
+            e.preventDefault();
+            const date = document.getElementById('eventDate').value;
+            const title = document.getElementById('eventTitle').value.trim();
+            if (!date || !title) return;
+            const events = getCalendarEvents();
+            events.push({ date, title });
+            setCalendarEvents(events);
+            document.getElementById('eventForm').reset();
+            renderCalendar();
+            showDayEvents(date);
+        }
+
+        function deleteCalendarEvent(dateStr, idx) {
+            let events = getCalendarEvents();
+            const filtered = [];
+            let count = 0;
+            for (let ev of events) {
+                if (ev.date === dateStr && count === idx) {
+                    count++;
+                    continue;
+                }
+                if (ev.date === dateStr) count++;
+                filtered.push(ev);
+            }
+            setCalendarEvents(filtered);
+            renderCalendar();
+            showDayEvents(dateStr);
+        }
+
+        // Navigation
+        function changeMonth(offset) {
+            calendarState.month += offset;
+            if (calendarState.month < 0) {
+                calendarState.month = 11;
+                calendarState.year--;
+            } else if (calendarState.month > 11) {
+                calendarState.month = 0;
+                calendarState.year++;
+            }
+            renderCalendar();
+            document.getElementById('eventList').innerHTML = '';
+        }
+
+        // Add Calendar to Navigation
+        (function addCalendarNav() {
+            const nav = document.querySelector('nav .flex.items-center.space-x-4');
+            if (nav && !document.getElementById('calendarNavBtn')) {
+                const btn = document.createElement('button');
+                btn.id = "calendarNavBtn";
+                btn.className = "text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium";
+                btn.textContent = "Calendar";
+                btn.onclick = function() {
+                    showSection('calendar');
+                    renderCalendar();
+                    document.getElementById('eventList').innerHTML = '';
+                };
+                nav.insertBefore(btn, nav.children[1]);
+            }
+        })();
+
+        // Attach month navigation after DOM loaded
+        window.addEventListener('DOMContentLoaded', () => {
+            const prev = document.getElementById('prevMonth');
+            const next = document.getElementById('nextMonth');
+            if (prev && next) {
+                prev.onclick = () => changeMonth(-1);
+                next.onclick = () => changeMonth(1);
+            }
+        });
+    </script>
+    <!-- Jobs Section -->
+    <div id="jobs" class="section hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-gray-900">Available Student Jobs</h2>
+                <p class="text-gray-600 mt-2">Find flexible opportunities that fit your schedule</p>
+            </div>
+
+            <!-- Filters -->
+          <div class="mb-6 flex flex-wrap gap-4">
+    <select id="countryFilter" class="border border-gray-300 rounded-md px-3 py-2">
+        <option value="">All Countries</option>
+        <option value="United States">United States</option>
+        <!-- Add more countries if needed -->
+    </select>
+    <select id="categoryFilter" class="border border-gray-300 rounded-md px-3 py-2">
+        <option value="">All Categories</option>
+        <option value="retail">Retail</option>
+        <option value="food">Food Service</option>
+        <option value="tutoring">Tutoring</option>
+        <option value="campus">Campus Jobs</option>
+        <option value="remote">Remote Work</option>
+        <option value="delivery">Delivery</option>
+    </select>
+    <select id="payFilter" class="border border-gray-300 rounded-md px-3 py-2">
+        <option value="">All Pay Ranges</option>
+        <option value="10-15">$10-15/hour</option>
+        <option value="15-20">$15-20/hour</option>
+        <option value="20+">$20+/hour</option>
+    </select>
+    <button onclick="filterJobs()" class="bg-primary text-white px-4 py-2 rounded-md hover:bg-secondary">Apply Filters</button>
+</div>
+
+            </div>
+
+            <!-- Job Listings -->
+            <div id="jobListings" class="space-y-4">
+            
+            </div>
+        </div>
+    </div>
+
+    <!-- Post Job  -->
+    <div id="post" class="section hidden">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">Post a Student Job</h2>
+                <form id="postJobForm" class="space-y-6" onsubmit="postJob(event)"></form>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Job Title</label>
+                        <input type="text" id="jobTitle" required class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Company/Organization</label>
+                        <input type="text" id="company" required class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary">
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Category</label>
+                            <select id="jobCategory" required class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary">
+                                <option value="">Select Category</option>
+                                <option value="retail">Retail</option>
+                                <option value="food">Food Service</option>
+                                <option value="tutoring">Tutoring</option>
+                                <option value="campus">Campus Jobs</option>
+                                <option value="remote">Remote Work</option>
+                                <option value="delivery">Delivery</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Hourly Pay</label>
+                            <input type="number" id="hourlyPay" min="10" max="50" required class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Location</label>
+                        <input type="text" id="location" required class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Job Description</label>
+                        <textarea id="description" rows="4" required class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Requirements</label>
+                        <textarea id="requirements" rows="3" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Contact Email</label>
+                        <input type="email" id="contactEmail" required class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary">
+                    </div>
+                    <button type="submit" class="w-full bg-primary text-white py-3 px-4 rounded-md hover:bg-secondary font-medium">Post Job</button>
+                </form>
+                <div id="postJobStatus" class="mt-4 text-center text-sm"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Section -->
+    <div id="profile" class="section hidden">
+        <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <div class="relative bg-gradient-to-br from-primary via-blue-400 to-secondary rounded-3xl shadow-2xl p-1">
+                <div class="bg-white rounded-2xl p-8 shadow-lg">
+                    <div class="flex flex-col md:flex-row items-center md:items-start gap-8">
+                        <!-- Avatar -->
+                        <div class="flex-shrink-0">
+                            <div class="w-32 h-32 rounded-full bg-gradient-to-tr from-primary to-secondary flex items-center justify-center shadow-lg border-4 border-white">
+                                <span class="text-5xl font-bold text-white select-none">
+                                    <script>
+                                        // Render initials for avatar
+                                        (function() {
+                                            const user = JSON.parse(localStorage.getItem('currentUser') || 'null');
+                                            if (user && user.name) {
+                                                document.write(user.name.split(' ').map(n => n[0]).join('').toUpperCase());
+                                            } else {
+                                                document.write('U');
+                                            }
+                                        })();
+                                    </script>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex-1">
+                            <h2 class="text-3xl font-extrabold text-primary mb-2" id="profileNameDisplay"></h2>
+                            <p class="text-lg text-gray-700 italic mb-4" id="profileBioDisplay"></p>
+                            <div class="mb-4">
+                                <span class="inline-block bg-primary/10 text-primary px-3 py-1 rounded-full font-semibold text-sm mr-2">Likes</span>
+                                <span class="text-gray-600" id="profileLikesDisplay"></span>
+                            </div>
+                            <div>
+                                <span class="font-semibold text-gray-800">Email:</span>
+                                <span class="text-gray-600" id="profileEmailDisplay"></span>
+                            </div>
+                            <div class="mt-6 flex flex-wrap gap-3">
+                                <button onclick="editProfile()" class="bg-primary text-white px-6 py-2 rounded-md hover:bg-secondary font-medium shadow transition">Edit Profile</button>
+                                <button onclick="logoutProfile()" class="bg-gray-200 text-gray-700 px-6 py-2 rounded-md hover:bg-gray-300 font-medium shadow transition">Logout</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div id="editProfileModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+            <h3 class="text-xl font-bold text-gray-900 mb-4">Edit Profile</h3>
+            <form onsubmit="saveProfile(event)">
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                        <input type="text" id="profileName" required class="w-full border border-gray-300 rounded-md px-3 py-2">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Bio</label>
+                        <textarea id="profileBio" rows="3" required class="w-full border border-gray-300 rounded-md px-3 py-2"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Likes (comma separated)</label>
+                        <input type="text" id="profileLikes" class="w-full border border-gray-300 rounded-md px-3 py-2" placeholder="e.g. coding, reading, football">
+                    </div>
+                </div>
+                <div class="mt-6 flex space-x-3">
+                    <button type="submit" class="flex-1 bg-primary text-white py-2 px-4 rounded-md hover:bg-secondary">Save</button>
+                    <button type="button" onclick="closeEditProfileModal()" class="flex-1 bg-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-400">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Sign Up Page -->
+    <div id="signup" class="section hidden">
+        <div class="max-w-md mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Sign Up</h2>
+                <form onsubmit="signup(event)" class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                        <input type="email" id="signupEmail" required class="w-full border border-gray-300 rounded-md px-3 py-2">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                        <input type="password" id="signupPassword" required class="w-full border border-gray-300 rounded-md px-3 py-2">
+                    </div>
+                    <button type="submit" class="w-full bg-primary text-white py-3 px-4 rounded-md hover:bg-secondary font-medium">Sign Up</button>
+                </form>
+                <p class="mt-4 text-sm text-gray-600">Already have an account? <a href="#" onclick="showSection('login')" class="text-primary hover:underline">Login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Page -->
+    <div id="login" class="section hidden">
+        <div class="max-w-md mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Login</h2>
+                <form onsubmit="login(event)" class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                        <input type="email" id="loginEmail" required class="w-full border border-gray-300 rounded-md px-3 py-2">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                        <input type="password" id="loginPassword" required class="w-full border border-gray-300 rounded-md px-3 py-2">
+                    </div>
+                    <button type="submit" class="w-full bg-primary text-white py-3 px-4 rounded-md hover:bg-secondary font-medium">Login</button>
+                </form>
+                <p class="mt-4 text-sm text-gray-600">Don't have an account? <a href="#" onclick="showSection('signup')" class="text-primary hover:underline">Sign Up</a></p>
+            </div>
+        </div>
+    </div>
+
+    
+    <div id="applicationModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+            <h3 class="text-xl font-bold text-gray-900 mb-4">Apply for Position</h3>
+            <form onsubmit="submitApplication(event)">
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                        <input type="text" id="applicantName" required class="w-full border border-gray-300 rounded-md px-3 py-2">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                        <input type="email" id="applicantEmail" required class="w-full border border-gray-300 rounded-md px-3 py-2">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Phone</label>
+                        <input type="tel" id="applicantPhone" required class="w-full border border-gray-300 rounded-md px-3 py-2">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">University/School</label>
+                        <input type="text" id="applicantSchool" required class="w-full border border-gray-300 rounded-md px-3 py-2">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Available Hours (per week)</label>
+                        <input type="number" id="availableHours" min="5" max="40" required class="w-full border border-gray-300 rounded-md px-3 py-2">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Why are you interested?</label>
+                        <textarea id="whyInterested" rows="3" required class="w-full border border-gray-300 rounded-md px-3 py-2"></textarea>
+                    </div>
+                </div>
+                <div class="mt-6 flex space-x-3">
+                    <button type="submit" class="flex-1 bg-primary text-white py-2 px-4 rounded-md hover:bg-secondary">Submit Application</button>
+                    <button type="button" onclick="closeModal()" class="flex-1 bg-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-400">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Notification with localStorage persistence
+        function getNotifications() {
+            return JSON.parse(localStorage.getItem('notifications') || '[]');
+        }
+        function setNotifications(notifs) {
+            localStorage.setItem('notifications', JSON.stringify(notifs));
+        }
+
+        let notifications = getNotifications();
+        if (!notifications.length) {
+            notifications = [
+                { id: 1, message: "Welcome to Brexbin! 🎉", time: "Just now", read: false },
+                { id: 2, message: "New job posted: Math Tutor", time: "2 hours ago", read: false },
+                { id: 3, message: "Your profile was updated successfully.", time: "Yesterday", read: true }
+            ];
+            setNotifications(notifications);
+        }
+
+        function toggleNotifications() {
+            const panel = document.getElementById('notificationPanel');
+            panel.classList.toggle('hidden');
+            if (!panel.classList.contains('hidden')) {
+                renderNotifications();
+                markNotificationsRead();
+            }
+        }
+
+        function renderNotifications() {
+            const list = document.getElementById('notificationList');
+            if (!notifications.length) {
+                list.innerHTML = `<div class="text-gray-500 text-center py-6">No notifications.</div>`;
+                return;
+            }
+            list.innerHTML = notifications.map(n => `
+                <div class="flex items-start gap-2 ${n.read ? 'opacity-60' : ''}">
+                    <span class="mt-1">
+                        <svg class="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                            <circle cx="10" cy="10" r="10"/>
+                        </svg>
+                    </span>
+                    <div>
+                        <div class="text-gray-800">${n.message}</div>
+                        <div class="text-xs text-gray-400">${n.time}</div>
+                    </div>
+                </div>
+            `).join('');
+            updateNotificationDot();
+        }
+
+        function markNotificationsRead() {
+            notifications = notifications.map(n => ({ ...n, read: true }));
+            setNotifications(notifications);
+            updateNotificationDot();
+        }
+
+        function updateNotificationDot() {
+            const dot = document.getElementById('notificationDot');
+            const hasUnread = notifications.some(n => !n.read);
+            if (hasUnread) {
+                dot.classList.remove('hidden');
+            } else {
+                dot.classList.add('hidden');
+            }
+        }
+
+        function addNotification(message) {
+            notifications.unshift({
+                id: Date.now(),
+                message,
+                time: "Just now",
+                read: false
+            });
+            setNotifications(notifications);
+            updateNotificationDot();
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            notifications = getNotifications();
+            updateNotificationDot();
+        });
+
+        // --- User/Profile Logic ---
+        function getUsers() {
+            return JSON.parse(localStorage.getItem('users') || '[]');
+        }
+        function setUsers(users) {
+            localStorage.setItem('users', JSON.stringify(users));
+        }
+        function getCurrentUser() {
+            return JSON.parse(localStorage.getItem('currentUser') || 'null');
+        }
+        function setCurrentUser(user) {
+            localStorage.setItem('currentUser', JSON.stringify(user));
+        }
+
+        function showProfile() {
+            showSection('profile');
+            renderProfile();
+        }
+
+        function renderProfile() {
+            const user = getCurrentUser();
+            if (!user) {
+                showSection('login');
+                return;
+            }
+            document.getElementById('profileNameDisplay').textContent = user.name || 'No Name Set';
+            document.getElementById('profileBioDisplay').textContent = user.bio || 'No bio yet.';
+            document.getElementById('profileLikesDisplay').textContent = user.likes && user.likes.length ? user.likes.join(', ') : 'None listed.';
+            document.getElementById('profileEmailDisplay').textContent = user.email;
+            // Update profile content
+            const profileContent = document.getElementById('profileContent');
+            if (!profileContent) {
+                console.error('Profile content element not found');
+                return;
+            }
+            
+            profileContent.innerHTML = '';
+            
+            if (!user) {
+                profileContent.innerHTML = '<p class="text-red-500">No user data available. Please log in.</p>';
+                return;
+            }
+            // Create profile content
+            document.getElementById('profileNameDisplay').textContent = user.name || 'No Name Set';
+            document.getElementById('profileBioDisplay').textContent = user.bio || 'No bio yet.';
+            document.getElementById('profileLikesDisplay').textContent = user.likes && user.likes.length ? user.likes.join(', ') : 'None listed.';
+            document.getElementById('profileEmailDisplay').textContent = user.email;
+            
+            const content = document.getElementById('profileContent');
+            content.innerHTML = `
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900">${user.name || 'No Name Set'}</h3>
+                    <p class="text-gray-700 mt-2">${user.bio || 'No bio yet.'}</p>
+                    <div class="mt-4">
+                        <span class="font-semibold text-gray-800">Likes:</span>
+                        <span class="text-gray-600">${user.likes ? user.likes.join(', ') : 'None listed.'}</span>
+                    </div>
+                    <div class="mt-4">
+                        <span class="font-semibold text-gray-800">Email:</span>
+                        <span class="text-gray-600">${user.email}</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        function editProfile() {
+            const user = getCurrentUser();
+            if (!user) return;
+            document.getElementById('profileName').value = user.name || '';
+            document.getElementById('profileBio').value = user.bio || '';
+            document.getElementById('profileLikes').value = user.likes ? user.likes.join(', ') : '';
+            document.getElementById('editProfileModal').classList.remove('hidden');
+            document.getElementById('editProfileModal').classList.add('flex');
+        }
+
+        function saveProfile(event) {
+            event.preventDefault();
+            let user = getCurrentUser();
+            if (!user) return;
+            user.name = document.getElementById('profileName').value;
+            user.bio = document.getElementById('profileBio').value;
+            user.likes = document.getElementById('profileLikes').value.split(',').map(l => l.trim()).filter(l => l);
+            setCurrentUser(user);
+
+            let users = getUsers();
+            users = users.map(u => u.email === user.email ? user : u);
+            setUsers(users);
+
+            closeEditProfileModal();
+            renderProfile();
+            addNotification("Your profile was updated successfully.");
+        }
+
+        function closeEditProfileModal() {
+            document.getElementById('editProfileModal').classList.add('hidden');
+            document.getElementById('editProfileModal').classList.remove('flex');
+        }
+
+        function logoutProfile() {
+            localStorage.removeItem('currentUser');
+            showSection('login');
+        }
+
+        function signup(event) {
+            event.preventDefault();
+            const email = document.getElementById('signupEmail').value.trim();
+            const password = document.getElementById('signupPassword').value;
+            let users = getUsers();
+            if (users.find(u => u.email === email)) {
+                alert('Email already registered.');
+                return;
+            }
+            const user = { email, password, name: '', bio: '', likes: [] };
+            users.push(user);
+            setUsers(users);
+            setCurrentUser(user);
+            alert('Signup successful! Please complete your profile.');
+            showProfile();
+            addNotification("Welcome to Brexbin ! 🎉");
+        }
+
+        function login(event) {
+            event.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            let users = getUsers();
+            const user = users.find(u => u.email === email && u.password === password);
+            if (!user) {
+                alert('Invalid email or password.');
+                return;
+            }
+            setCurrentUser(user);
+            showProfile();
+        }
+
+        function showSection(section) {
+            document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
+            document.getElementById(section).classList.remove('hidden');
+            if (section === 'jobs') displayJobs(jobs);
+            if (section === 'profile') renderProfile();
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            notifications = getNotifications();
+            const user = getCurrentUser();
+            if (user) {
+                showProfile();
+            } else {
+                showSection('login');
+            }
+            updateNotificationDot();
+        });
+
+        // --- Job Board  ---
+        let jobs = [
+            {
+            id: 1,
+            title: "Campus Library Assistant",
+            company: "University Library",
+            category: "campus",
+            pay: 12,
+            location: "On Campus",
+            country: "United States",
+            description: "Help students find resources, organize books, and assist with computer lab. Perfect for students who enjoy helping others and working in a quiet environment.",
+            requirements: "Must be enrolled student, basic computer skills, friendly attitude",
+            contact: "library@university.edu",
+            posted: "2 days ago"
+            },
+            {
+            id: 2,
+            title: "Barista",
+            company: "Campus Coffee Co.",
+            category: "food",
+            pay: 15,
+            location: "Student Union Building",
+            country: "United States",
+            description: "Prepare coffee drinks, serve pastries, and provide excellent customer service. Flexible scheduling around classes. Training provided.",
+            requirements: "Customer service experience preferred, availability for morning or afternoon shifts",
+            contact: "hiring@campuscoffee.com",
+            posted: "1 day ago"
+            },
+            {
+            id: 3,
+            title: "Math Tutor",
+            company: "Academic Success Center",
+            category: "tutoring",
+            pay: 18,
+            location: "Campus Tutoring Center",
+            country: "United States",
+            description: "Provide one-on-one and small group tutoring for calculus and algebra students. Set your own schedule based on availability.",
+            requirements: "B+ or higher in relevant math courses, strong communication skills",
+            contact: "tutoring@university.edu",
+            posted: "3 days ago"
+            },
+            {
+            id: 4,
+            title: "Retail Sales Associate",
+            company: "Campus Bookstore",
+            category: "retail",
+            pay: 13,
+            location: "University Bookstore",
+            country: "United States",
+            description: "Assist customers with textbook purchases, merchandise, and general inquiries. Great employee discount on school supplies and clothing.",
+            requirements: "Reliable, customer-focused, able to work weekends",
+            contact: "bookstore@university.edu",
+            posted: "5 days ago"
+            },
+            {
+            id: 5,
+            title: "Virtual Assistant",
+            company: "Local Business Solutions",
+            category: "remote",
+            pay: 16,
+            location: "Remote",
+            country: "United States",
+            description: "Help small businesses with email management, scheduling, and basic administrative tasks. Work from anywhere with internet connection.",
+            requirements: "Strong organizational skills, proficiency in Microsoft Office or Google Workspace",
+            contact: "jobs@localbizhelp.com",
+            posted: "1 week ago"
+            },
+            {
+            id: 6,
+            title: "Food Delivery Driver",
+            company: "Campus Eats",
+            category: "delivery",
+            pay: 14,
+            location: "Campus Area",
+            country: "United States",
+            description: "Deliver food orders to students and faculty. Use your own vehicle or bike. Keep 100% of tips plus hourly wage.",
+            requirements: "Valid driver's license, reliable transportation, smartphone",
+            contact: "drivers@campuseats.com",
+            posted: "4 days ago"
+            },
+            {
+            id: 7,
+            title: "Research Assistant",
+            company: "Psychology Department",
+            category: "campus",
+            pay: 15,
+            location: "Psychology Building",
+            country: "United States",
+            description: "Assist professors with research data collection and analysis. Great experience for students interested in graduate school.",
+            requirements: "Psychology major preferred, attention to detail, data entry experience helpful",
+            contact: "research@psych.university.edu",
+            posted: "1 week ago"
+            },
+            {
+            id: 8,
+            title: "Customer Service Rep",
+            company: "Student Tech Support",
+            category: "campus",
+            pay: 16,
+            location: "IT Help Desk",
+            country: "United States",
+            description: "Help students and staff with technology issues, password resets, and software questions. Technical training provided.",
+            requirements: "Basic computer knowledge, patience, problem-solving skills",
+            contact: "techsupport@university.edu",
+            posted: "6 days ago"
+            },
+            // USA jobs from Google search (examples)
+            {
+            id: 9,
+            title: "Part-Time Retail Associate",
+            company: "Target",
+            category: "retail",
+            pay: 15,
+            location: "New York, NY",
+            country: "United States",
+            description: "Assist customers, stock shelves, and operate cash registers. Flexible hours for students.",
+            requirements: "High school diploma or equivalent, strong communication skills",
+            contact: "careers@target.com",
+            posted: "2 days ago"
+            },
+            {
+            id: 10,
+            title: "Student Administrative Assistant",
+            company: "University of California, Los Angeles",
+            category: "campus",
+            pay: 17,
+            location: "Los Angeles, CA",
+            country: "United States",
+            description: "Support office staff with filing, scheduling, and data entry. Great for students seeking office experience.",
+            requirements: "Current UCLA student, basic computer skills",
+            contact: "jobs@ucla.edu",
+            posted: "3 days ago"
+            },
+            {
+            id: 11,
+            title: "Food Service Worker",
+            company: "Aramark",
+            category: "food",
+            pay: 14,
+            location: "Chicago, IL",
+            country: "United States",
+            description: "Serve food, maintain cleanliness, and assist with kitchen prep in a university dining hall.",
+            requirements: "Ability to stand for long periods, team player",
+            contact: "apply@aramark.com",
+            posted: "1 day ago"
+            },
+            {
+            id: 12,
+            title: "Remote Data Entry Clerk",
+            company: "Kelly Services",
+            category: "remote",
+            pay: 16,
+            location: "Remote",
+            country: "United States",
+            description: "Enter and update data for various clients. Work from home, ideal for students with good typing skills.",
+            requirements: "Attention to detail, reliable internet connection",
+            contact: "jobs@kellyservices.com",
+            posted: "4 days ago"
+            },
+            {
+            id: 13,
+            title: "Delivery Driver",
+            company: "DoorDash",
+            category: "delivery",
+            pay: 20,
+            location: "Houston, TX",
+            country: "United States",
+            description: "Deliver food orders to customers using your car or bike. Flexible scheduling and weekly pay.",
+            requirements: "Valid driver's license, smartphone",
+            contact: "support@doordash.com",
+            posted: "Today"
+            },
+            {
+            id: 14,
+            title: "Peer Tutor",
+            company: "Boston University",
+            category: "tutoring",
+            pay: 18,
+            location: "Boston, MA",
+            country: "United States",
+            description: "Tutor fellow students in math, science, or writing. Set your own hours and help others succeed.",
+            requirements: "Current BU student, GPA 3.0+",
+            contact: "tutoring@bu.edu",
+            posted: "2 days ago"
+            }
+        ];
+
+
+        /**
+         * Calculator for hours and money per hour
+         * Shows a modal where user can enter hours and hourly rate, and see total earnings.
+         */
+
+        // Add Calculator button to navigation
+        (function addCalculatorNav() {
+            const nav = document.querySelector('nav .flex.items-center.space-x-4');
+            if (nav && !document.getElementById('calculatorNavBtn')) {
+                const btn = document.createElement('button');
+                btn.id = "calculatorNavBtn";
+                btn.className = "text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium";
+                btn.textContent = "Earnings Calculator";
+                btn.onclick = function() {
+                    openCalculatorModal();
+                };
+                nav.appendChild(btn);
+            }
+        })();
+
+        // Calculator Modal HTML
+        (function addCalculatorModal() {
+            if (document.getElementById('calculatorModal')) return;
+            const modal = document.createElement('div');
+            modal.id = "calculatorModal";
+            modal.className = "fixed inset-0 bg-gray-600 bg-opacity-50 hidden items-center justify-center z-50";
+            modal.innerHTML = `
+                <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Earnings Calculator</h3>
+                    <form id="calculatorForm" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Hours Worked</label>
+                            <input type="number" id="calcHours" min="0" step="0.1" required class="w-full border border-gray-300 rounded-md px-3 py-2">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Hourly Rate ($)</label>
+                            <input type="number" id="calcRate" min="0" step="0.01" required class="w-full border border-gray-300 rounded-md px-3 py-2">
+                        </div>
+                        <div>
+                            <button type="submit" class="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-secondary font-medium">Calculate</button>
+                        </div>
+                    </form>
+                    <div id="calcResult" class="mt-4 text-lg font-semibold text-primary"></div>
+                    <div class="mt-4 flex space-x-3">
+                        <button type="button" onclick="closeCalculatorModal()" class="flex-1 bg-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-400">Close</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        })();
+
+        function openCalculatorModal() {
+            document.getElementById('calculatorModal').classList.remove('hidden');
+            document.getElementById('calculatorModal').classList.add('flex');
+            document.getElementById('calculatorForm').reset();
+            document.getElementById('calcResult').textContent = '';
+        }
+
+        function closeCalculatorModal() {
+            document.getElementById('calculatorModal').classList.add('hidden');
+            document.getElementById('calculatorModal').classList.remove('flex');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('calculatorForm');
+            if (form) {
+                form.onsubmit = function(e) {
+                    e.preventDefault();
+                    const hours = parseFloat(document.getElementById('calcHours').value);
+                    const rate = parseFloat(document.getElementById('calcRate').value);
+                    if (isNaN(hours) || isNaN(rate)) return;
+                    const total = hours * rate;
+                    document.getElementById('calcResult').textContent = `Total Earnings: $${total.toFixed(2)}`;
+                };
+            }
+        });
+
+        let currentJobId = null;
+
+        function displayJobs(jobsToShow) {
+            const container = document.getElementById('jobListings');
+            container.innerHTML = '';
+
+            jobsToShow.forEach(job => {
+                const jobCard = document.createElement('div');
+                jobCard.className = 'bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow';
+                jobCard.innerHTML = `
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900">${job.title}</h3>
+                            <p class="text-gray-600">${job.company}</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-2xl font-bold text-primary">$${job.pay}/hr</p>
+                            <p class="text-sm text-gray-500">${job.posted}</p>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <p class="text-gray-700 mb-2">${job.description}</p>
+                        <p class="text-sm text-gray-600"><strong>Requirements:</strong> ${job.requirements}</p>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center space-x-4">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary text-white">
+                                ${job.category.charAt(0).toUpperCase() + job.category.slice(1)}
+                            </span>
+                            <span class="text-sm text-gray-500">
+                                <svg class="inline w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                                ${job.location}
+                            </span>
+                        </div>
+                        <button onclick="openApplicationModal(${job.id})" class="bg-primary text-white px-6 py-2 rounded-md hover:bg-secondary font-medium">
+                            Apply Now
+                        </button>
+                    </div>
+                `;
+                container.appendChild(jobCard);
+            });
+        }
+
+        function filterJobs() {
+            const categoryFilter = document.getElementById('categoryFilter').value;
+            const payFilter = document.getElementById('payFilter').value;
+
+            let filteredJobs = jobs.filter(job => {
+                let matchesCategory = !categoryFilter || job.category === categoryFilter;
+                let matchesPay = true;
+
+                if (payFilter) {
+                    if (payFilter === '10-15') {
+                        matchesPay = job.pay >= 10 && job.pay <= 15;
+                    } else if (payFilter === '15-20') {
+                        matchesPay = job.pay > 15 && job.pay <= 20;
+                    } else if (payFilter === '20+') {
+                        matchesPay = job.pay > 20;
+                    }
+                }
+
+                return matchesCategory && matchesPay;
+            });
+
+            displayJobs(filteredJobs);
+        }
+
+        function openApplicationModal(jobId) {
+            currentJobId = jobId;
+            document.getElementById('applicationModal').classList.remove('hidden');
+            document.getElementById('applicationModal').classList.add('flex');
+        }
+
+        function closeModal() {
+            document.getElementById('applicationModal').classList.add('hidden');
+            document.getElementById('applicationModal').classList.remove('flex');
+            currentJobId = null;
+        }
+
+
+
+        function postJob(event) {
+            event.preventDefault();
+
+            const newJob = {
+                id: jobs.length + 1,
+                title: document.getElementById('jobTitle').value,
+                company: document.getElementById('company').value,
+                category: document.getElementById('jobCategory').value,
+                pay: parseInt(document.getElementById('hourlyPay').value),
+                location: document.getElementById('location').value,
+                description: document.getElementById('description').value,
+                requirements: document.getElementById('requirements').value,
+                contact: document.getElementById('contactEmail').value,
+                posted: 'Just posted'
+            };
+
+            jobs.unshift(newJob);
+
+            alert('Job posted successfully! It will appear in the job listings.');
+            event.target.reset();
+            showSection('jobs');
+            addNotification(`New job posted: ${newJob.title}`);
+        }
+
+        showSection('home');
+    </script>
+</body>
+</html>
